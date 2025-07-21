@@ -3,7 +3,11 @@ package org.dromara.common.doc.config;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.media.IntegerSchema;
+import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.parameters.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.dromara.common.core.utils.StringUtils;
 import org.dromara.common.doc.config.properties.SpringDocProperties;
@@ -12,6 +16,7 @@ import org.springdoc.core.configuration.SpringDocConfiguration;
 import org.springdoc.core.customizers.OpenApiBuilderCustomizer;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springdoc.core.customizers.ServerBaseUrlCustomizer;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springdoc.core.properties.SpringDocConfigProperties;
 import org.springdoc.core.providers.JavadocProvider;
 import org.springdoc.core.service.OpenAPIService;
@@ -23,6 +28,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +117,44 @@ public class SpringDocConfig {
         };
     }
 
+    final static String  HEADER_TENANT_ID ="tenant-id";
+    /**
+     * 构建 Tenant 租户编号请求头参数
+     *
+     * @return 多租户参数
+     */
+    private static Parameter buildTenantHeaderParameter() {
+        return new Parameter()
+            .name(HEADER_TENANT_ID)
+            .description("租户编号")
+            .in(String.valueOf(SecurityScheme.In.HEADER))
+            .schema(new IntegerSchema()._default(1L).name(HEADER_TENANT_ID).description("租户编号"));
+    }
+    public static GroupedOpenApi buildGroupedOpenApi(String group) {
+        return buildGroupedOpenApi(group, group);
+    }
+    public static GroupedOpenApi buildGroupedOpenApi(String group, String path) {
+        return GroupedOpenApi.builder()
+            .group(group)
+            .pathsToMatch("/admin-api/" + path + "/**", "/app-api/" + path + "/**")
+            .addOperationCustomizer((operation, handlerMethod) -> operation
+                .addParametersItem(buildTenantHeaderParameter())
+                .addParametersItem(buildSecurityHeaderParameter()))
+            .build();
+    }
+    /**
+     * 构建 Authorization 认证请求头参数
+     * 解决 Knife4j <a href="https://gitee.com/xiaoym/knife4j/issues/I69QBU">Authorize 未生效，请求header里未包含参数</a>
+     *
+     * @return 认证参数
+     */
+    private static Parameter buildSecurityHeaderParameter() {
+        return new Parameter()
+            .name(HttpHeaders.AUTHORIZATION)
+            .description("认证 Token")
+            .in(String.valueOf(SecurityScheme.In.HEADER))
+            .schema(new StringSchema()._default("Bearer test1").name(HEADER_TENANT_ID).description("认证 Token"));
+    }
     /**
      * 单独使用一个类便于判断 解决springdoc路径拼接重复问题
      *

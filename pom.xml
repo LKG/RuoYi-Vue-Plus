@@ -62,6 +62,7 @@
         <mybatis-flex.version>1.10.9</mybatis-flex.version>
         <x-file-storage.version>2.2.1</x-file-storage.version>
         <cosid.version>2.13.0</cosid.version>
+        <weixin-java.version>4.7.7.B</weixin-java.version>
         <!--添加jar  -->
 
         <!-- 插件版本 -->
@@ -113,6 +114,23 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
+            <!--  weixin-java-tools begin-->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-pay</artifactId>
+                <version>${weixin-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java-mp-spring-boot-starter</artifactId>
+                <version>${weixin-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java-miniapp-spring-boot-starter</artifactId>
+                <version>${weixin-java.version}</version>
+            </dependency>
+            <!--  weixin-java-tools end-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
