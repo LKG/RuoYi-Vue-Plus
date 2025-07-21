@@ -1,0 +1,23 @@
+CREATE TABLE fm_user_form_data (
+  id BIGINT NOT NULL COMMENT '主键',
+  form_key VARCHAR ( 100 ) NOT NULL COMMENT '表单key',
+  serial_number INT DEFAULT NULL COMMENT '序号',
+  original_data json DEFAULT NULL COMMENT '填写结果',
+  submit_ua json DEFAULT NULL COMMENT '提交ua',
+  submit_os VARCHAR ( 50 ) DEFAULT NULL COMMENT '提交系统',
+  submit_browser VARCHAR ( 50 ) DEFAULT NULL COMMENT '提交浏览器',
+  submit_request_ip VARCHAR ( 50 ) DEFAULT NULL COMMENT '请求ip',
+  submit_address VARCHAR ( 50 ) DEFAULT NULL COMMENT '提交地址',
+  complete_time INT DEFAULT NULL COMMENT '完成时间 毫秒',
+  wx_open_id VARCHAR ( 100 ) DEFAULT NULL COMMENT '微信openId',
+  wx_user_info json DEFAULT NULL COMMENT '微信用户信息',
+  ext_value VARCHAR ( 255 ) DEFAULT NULL COMMENT '扩展字段记录来源等',
+  create_dept BIGINT ( 20 ) COMMENT '创建部门',
+  create_by BIGINT ( 20 ) COMMENT '创建者',
+  create_time datetime COMMENT '创建时间',
+  update_by BIGINT ( 20 ) COMMENT '更新者',
+  update_time datetime COMMENT '更新时间',
+  del_flag CHAR ( 1 ) DEFAULT '0' COMMENT '删除标志（0代表存在 1代表删除）',
+  PRIMARY KEY ( id ) USING BTREE,
+  KEY project_key ( form_key ) USING BTREE
+) ENGINE = INNODB AUTO_INCREMENT = 211738 ROW_FORMAT = DYNAMIC COMMENT = '表单收集数据结果';

@@ -162,7 +162,7 @@ public class TenantHelper {
         tenantId = storage.getString(cacheKey);
         // 如果为 -1 说明已经查过redis并且不存在值 则直接返回null
         if (StringUtils.isNotBlank(tenantId)) {
-            return tenantId.equals("-1") ? null : tenantId;
+            return "-1".equals(tenantId) ? null : tenantId;
         }
         tenantId = RedisUtils.getCacheObject(cacheKey);
         storage.set(cacheKey, StringUtils.isBlank(tenantId) ? "-1" : tenantId);

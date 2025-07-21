@@ -254,12 +254,13 @@ public class OssClient {
                 .build();
             // 使用 S3TransferManager 下载文件
             Download<ResponseInputStream<GetObjectResponse>> responseFuture = transferManager.download(downloadRequest);
-            // 输出到流中
-            try (ResponseInputStream<GetObjectResponse> responseStream = responseFuture.completionFuture().join().result()) { // auto-closeable stream
+            // 输出到流中// auto-closeable stream
+            try (ResponseInputStream<GetObjectResponse> responseStream = responseFuture.completionFuture().join().result()) {
                 if (consumer != null) {
                     consumer.accept(responseStream.response().contentLength());
                 }
-                responseStream.transferTo(out); // 阻塞调用线程 blocks the calling thread
+                // 阻塞调用线程 blocks the calling thread
+                responseStream.transferTo(out);
             }
         } catch (Exception e) {
             throw new OssException("文件下载失败，错误信息:[" + e.getMessage() + "]");

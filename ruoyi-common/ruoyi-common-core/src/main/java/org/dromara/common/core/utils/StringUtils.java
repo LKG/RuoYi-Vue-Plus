@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.StrUtil;
+import org.apache.commons.lang3.Strings;
 import org.springframework.util.AntPathMatcher;
 
 import java.nio.charset.Charset;
@@ -21,7 +22,57 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static final String SEPARATOR = ",";
 
     public static final String SLASH = "/";
-
+    public static String removeStart(final String str, final String remove) {
+        return Strings.CS.removeStart(str, remove);
+    }
+    public static boolean contains(final CharSequence seq, final CharSequence searchSeq) {
+        return Strings.CS.contains(seq, searchSeq);
+    }
+    public static boolean containsAny(final CharSequence cs, final CharSequence... searchCharSequences) {
+        return Strings.CS.containsAny(cs, searchCharSequences);
+    }
+    public static boolean equals(final CharSequence cs1, final CharSequence cs2) {
+        return Strings.CS.equals(cs1, cs2);
+    }
+    public static boolean equalsAny(final CharSequence string, final CharSequence... searchStrings) {
+        return Strings.CI.equalsAny(string, searchStrings);
+    }
+    public static boolean equalsAnyIgnoreCase(final CharSequence string, final CharSequence... searchStrings) {
+        return equalsAny(string, searchStrings);
+    }
+    public static boolean containsIgnoreCase(final CharSequence str, final CharSequence searchStr) {
+        return Strings.CI.contains(str, searchStr);
+    }
+    public static boolean endsWithIgnoreCase(final CharSequence str, final CharSequence suffix) {
+        return Strings.CI.endsWith(str, suffix);
+    }
+    public static int indexOf(final CharSequence seq, final CharSequence searchSeq) {
+        return Strings.CS.indexOf(seq, searchSeq);
+    }
+    public static String remove(final String str, final String remove) {
+        return Strings.CS.remove(str, remove);
+    }
+    public static boolean startsWith(final CharSequence str, final CharSequence prefix) {
+        return Strings.CS.startsWith(str, prefix);
+    }
+    public static boolean equalsIgnoreCase(final CharSequence cs1, final CharSequence cs2) {
+        return Strings.CI.equals(cs1, cs2);
+    }
+    public static String replace(final String text, final String searchString, final String replacement) {
+        return Strings.CS.replace(text, searchString, replacement);
+    }
+    public static boolean startsWithIgnoreCase(final CharSequence str, final CharSequence prefix) {
+        return Strings.CI.startsWith(str, prefix);
+    }
+    public static boolean endsWithAny(final CharSequence sequence, final CharSequence... searchStrings) {
+        return Strings.CS.endsWithAny(sequence, searchStrings);
+    }
+    public static boolean endsWith(final CharSequence str, final CharSequence suffix) {
+        return Strings.CS.endsWith(str, suffix);
+    }
+    public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr) {
+        return Strings.CI.indexOf(str, searchStr);
+    }
     @Deprecated
     private StringUtils() {
     }

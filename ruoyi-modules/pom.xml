@@ -15,6 +15,9 @@
         <module>ruoyi-job</module>
         <module>ruoyi-system</module>
         <module>ruoyi-workflow</module>
+<!--        <module>ruoyi-edu</module>-->
+<!--        <module>ruoyi-pay</module>-->
+<!--        <module>ruoyi-antflow</module>-->
     </modules>
 
     <artifactId>ruoyi-modules</artifactId>
