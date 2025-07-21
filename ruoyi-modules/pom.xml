@@ -16,6 +16,7 @@
         <module>ruoyi-system</module>
         <module>ruoyi-workflow</module>
         <module>ruoyi-edu</module>
+        <module>ruoyi-pay</module>
     </modules>
 
     <artifactId>ruoyi-modules</artifactId>

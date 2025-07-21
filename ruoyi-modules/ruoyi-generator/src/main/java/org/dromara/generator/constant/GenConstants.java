@@ -1,5 +1,7 @@
 package org.dromara.generator.constant;
 
+import org.dromara.generator.enums.CodegenTemplateType;
+
 /**
  * 代码生成通用常量
  *
@@ -14,7 +16,7 @@ public interface GenConstants {
     /**
      * 树表（增删改查）
      */
-    String TPL_TREE = "tree";
+    String TPL_TREE =  CodegenTemplateType.TREE.getCode();;
 
     /**
      * 树编码字段

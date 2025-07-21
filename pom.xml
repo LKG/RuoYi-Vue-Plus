@@ -63,6 +63,7 @@
         <x-file-storage.version>2.2.1</x-file-storage.version>
         <cosid.version>2.13.0</cosid.version>
         <weixin-java.version>4.7.7.B</weixin-java.version>
+        <alipay.version>4.40.186.ALL</alipay.version>
         <!--添加jar  -->
 
         <!-- 插件版本 -->
