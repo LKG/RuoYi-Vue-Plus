@@ -49,6 +49,20 @@
         <anyline.version>8.7.2-20250603</anyline.version>
         <!-- 工作流配置 -->
         <warm-flow.version>1.7.4</warm-flow.version>
+        <!--添加jar  -->
+        <poi-ooxml.version>5.4.1</poi-ooxml.version>
+        <poi.version>5.4.1</poi.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
+        <crane4j.version>2.9.0</crane4j.version>
+        <knife4j.version>4.5.0</knife4j.version>
+        <tlog.version>1.5.2</tlog.version>
+        <truelicense.version>1.33</truelicense.version>
+        <zip4j.version>2.11.5</zip4j.version>
+        <mybatis-plus.version>3.5.12</mybatis-plus.version>
+        <mybatis-flex.version>1.10.9</mybatis-flex.version>
+        <x-file-storage.version>2.2.1</x-file-storage.version>
+        <cosid.version>2.13.0</cosid.version>
+        <!--添加jar  -->
 
         <!-- 插件版本 -->
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
@@ -99,7 +113,11 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
-
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
             <!-- SpringBoot的依赖配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -356,7 +374,12 @@
                 <artifactId>ruoyi-workflow</artifactId>
                 <version>${revision}</version>
             </dependency>
-
+            <!--  工作流模块  -->
+            <dependency>
+                <groupId>org.dromara</groupId>
+                <artifactId>ruoyi-edu</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

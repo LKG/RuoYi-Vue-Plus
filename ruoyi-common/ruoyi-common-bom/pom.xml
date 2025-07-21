@@ -178,7 +178,12 @@
                 <artifactId>ruoyi-common-sse</artifactId>
                 <version>${revision}</version>
             </dependency>
-
+            <!-- license模块 -->
+            <dependency>
+                <groupId>org.dromara</groupId>
+                <artifactId>ruoyi-common-license</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

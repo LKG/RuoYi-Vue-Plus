@@ -391,7 +391,7 @@ public class MailUtils {
             authenticator = new JakartaUserPassAuthenticator(mailAccount.getUser(), mailAccount.getPass());
         }
 
-        return isSingleton ? Session.getDefaultInstance(mailAccount.getSmtpProps(), authenticator) //
+        return isSingleton ? Session.getDefaultInstance(mailAccount.getSmtpProps(), authenticator)
             : Session.getInstance(mailAccount.getSmtpProps(), authenticator);
     }
 
