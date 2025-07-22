@@ -14,6 +14,8 @@ mybatis-flex
 * 适配 JetCache 缓存框架（比 Spring Cache 更强大易用），通过注解声明即可快速实现方法级缓存，极大改善编码式缓存体验，且支持灵活的二级缓存配置、分布式自动刷新等能力；
 * 适配  Knife4j
 * 适配  dy-java  https://gitee.com/dromara/dy-java
+* 适配  easy-trans-anno 
+* 适配  transmittable-thread-local
 ## 添加技术栈
 | 名称                                                                             | 版本         | 简介                                                                                      |
 |:-------------------------------------------------------------------------------|:-----------|:----------------------------------------------------------------------------------------|
@@ -25,6 +27,7 @@ mybatis-flex
 | [AJ-Captcha](https://ajcaptcha.beliefteam.cn/captcha-doc/)                     | 1.3.0      | Java 行为验证码，包含滑动拼图、文字点选两种方式，UI支持弹出和嵌入两种方式。                                               |
 | Easy Captcha                                                                   | 1.6.2      | Java 图形验证码，支持 gif、中文、算术等类型，可用于 Java Web、JavaSE 等项目。                                     |
 | [dy-java](https://gitee.com/dromara/dy-java)                                   | 1.0.0      | DyJava 是一款功能强大的抖音 Java 开发工具包（SDK），支持抖音各个应用 OpenAPI 快速调用，包括但不限于移动/网站应用、抖音开放平台、抖店和抖音小程序等。 |
+| [easy-trans-anno](https://gitee.com/dromara/easy_trans)                        | 3.1.2      | 数据翻译插件                                                                                  |
 
 
 
@@ -56,8 +59,8 @@ ruoyi-vue-plus
 │    └─ ruoyi-edu（教育模块）
 │    └─ ruoyi-cms（内容模块）
 │    └─ ruoyi-member（会员模块）
+│    └─ ruoyi-pay（支付模块）
 │    └─ ruoyi-crm（crm模块）
-│    └─ ruoyi-erp（erp模块）
 │    └─ ruoyi-ai（ai模块）
 ├─ pom.xml（包含打包相关配置）
 ```

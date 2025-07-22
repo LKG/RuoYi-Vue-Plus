@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * JSON 工具类
  *
- * @author 芋道源码
+ * @author 疯狂的狮子
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JsonUtils {

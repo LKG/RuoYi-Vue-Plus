@@ -64,6 +64,9 @@
         <cosid.version>2.13.0</cosid.version>
         <weixin-java.version>4.7.7.B</weixin-java.version>
         <alipay.version>4.40.186.ALL</alipay.version>
+        <bizlog-sdk.version>3.0.6</bizlog-sdk.version>
+        <easy-trans.version>3.1.2</easy-trans.version>
+        <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
         <!--添加jar  -->
 
         <!-- 插件版本 -->
@@ -115,6 +118,23 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
+            <!-- 解决 ThreadLocal 父子线程的传值问题 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mouzt</groupId>
+                <artifactId>bizlog-sdk</artifactId>
+                <version>${bizlog-sdk.version}</version>
+                <exclusions>
+                    <exclusion> <!-- 排除掉springboot依赖使用项目的 -->
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
             <!--  weixin-java-tools begin-->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
@@ -418,6 +438,9 @@
         <module>ruoyi-common</module>
         <module>ruoyi-extend</module>
         <module>ruoyi-modules</module>
+        <module>ruoyi-modules/ruoyi-crm</module>
+        <module>ruoyi-modules/ruoyi-ai</module>
+        <module>ruoyi-modules/ruoyi-cms</module>
     </modules>
     <packaging>pom</packaging>
 
