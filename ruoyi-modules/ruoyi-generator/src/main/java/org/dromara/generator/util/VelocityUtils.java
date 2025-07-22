@@ -14,6 +14,7 @@ import org.dromara.generator.domain.GenTableColumn;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.velocity.VelocityContext;
+import org.dromara.generator.enums.TplCategory;
 
 import java.util.*;
 
@@ -39,6 +40,8 @@ public class VelocityUtils {
      * 默认上级菜单，系统工具
      */
     private static final String DEFAULT_PARENT_MENU_ID = "3";
+
+
 
     /**
      * 设置模板变量信息
@@ -72,7 +75,7 @@ public class VelocityUtils {
         velocityContext.put("table", genTable);
         velocityContext.put("dicts", getDicts(genTable));
         setMenuVelocityContext(velocityContext, genTable);
-        if (GenConstants.TPL_TREE.equals(tplCategory)) {
+        if (TplCategory.isTree(tplCategory)) {
             setTreeVelocityContext(velocityContext, genTable);
         }
         // 判断是modal还是drawer
@@ -107,7 +110,12 @@ public class VelocityUtils {
         String parentMenuId = getParentMenuId(paramsObj);
         context.put("parentMenuId", parentMenuId);
     }
+    /**
+     * 主子表逻辑处理
+     */
+    public static void setSubVelocityContext(VelocityContext context, GenTable genTable){
 
+    }
     public static void setTreeVelocityContext(VelocityContext context, GenTable genTable) {
         String options = genTable.getOptions();
         Dict paramsObj = JsonUtils.parseMap(options);
@@ -153,9 +161,9 @@ public class VelocityUtils {
         }
         templates.add("vm/ts/api.ts.vm");
         templates.add("vm/ts/types.ts.vm");
-        if (GenConstants.TPL_CRUD.equals(tplCategory)) {
+        if (TplCategory.isCrud(tplCategory)) {
             templates.add("vm/vue/index.vue.vm");
-        } else if (GenConstants.TPL_TREE.equals(tplCategory)) {
+        } else if (TplCategory.isTree(tplCategory)) {
             templates.add("vm/vue/index-tree.vue.vm");
         }
 
@@ -165,14 +173,19 @@ public class VelocityUtils {
         templates.add("vm/vben5/api/index.ts.vm");
         templates.add("vm/vben5/api/model.d.ts.vm");
         templates.add("vm/vben5/views/data.ts.vm");
-        if (GenConstants.TPL_CRUD.equals(tplCategory)) {
+        if (TplCategory.isCrud(tplCategory)) {
             templates.add("vm/vben5/views/index_vben.vue.vm");
             templates.add("vm/vben5/views/popup.vue.vm");
-        } else if (GenConstants.TPL_TREE.equals(tplCategory)) {
+        } else if (TplCategory.isTree(tplCategory)) {
             templates.add("vm/vben5/views/index_vben_tree.vue.vm");
             templates.add("vm/vben5/views/popup_tree.vue.vm");
+        }else if(TplCategory.isMaster(tplCategory)) {
+            templates.add("vm/vben5/views/modules/form_sub_erp.vue.vm");
+            templates.add("vm/vben5/views/modules/form_sub_inner.vue.vm");
+            templates.add("vm/vben5/views/modules/form_sub_normal.vue.vm");
+            templates.add("vm/vben5/views/modules/list_sub_erp.vue.vm");
+            templates.add("vm/vben5/views/modules/list_sub_inner.vue.vm");
         }
-
         return templates;
     }
 

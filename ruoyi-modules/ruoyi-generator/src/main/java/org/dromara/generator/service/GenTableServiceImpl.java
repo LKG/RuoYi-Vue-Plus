@@ -31,6 +31,7 @@ import org.dromara.common.mybatis.core.page.TableDataInfo;
 import org.dromara.generator.constant.GenConstants;
 import org.dromara.generator.domain.GenTable;
 import org.dromara.generator.domain.GenTableColumn;
+import org.dromara.generator.enums.TplCategory;
 import org.dromara.generator.mapper.GenTableColumnMapper;
 import org.dromara.generator.mapper.GenTableMapper;
 import org.dromara.generator.util.GenUtils;
@@ -505,7 +506,7 @@ public class GenTableServiceImpl implements IGenTableService {
      */
     @Override
     public void validateEdit(GenTable genTable) {
-        if (GenConstants.TPL_TREE.equals(genTable.getTplCategory())) {
+        if (TplCategory.isTree(genTable.getTplCategory())) {
             String options = JsonUtils.toJsonString(genTable.getParams());
             Dict paramsObj = JsonUtils.parseMap(options);
             if (StringUtils.isEmpty(paramsObj.getStr(GenConstants.TREE_CODE))) {

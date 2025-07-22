@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.dromara.generator.enums.TplCategory;
 
 import java.util.List;
 
@@ -175,7 +176,7 @@ public class GenTable extends BaseEntity {
     }
 
     public static boolean isTree(String tplCategory) {
-        return tplCategory != null && StringUtils.equals(GenConstants.TPL_TREE, tplCategory);
+        return TplCategory.isTree(tplCategory);
     }
 
     public boolean isCrud() {
@@ -183,7 +184,7 @@ public class GenTable extends BaseEntity {
     }
 
     public static boolean isCrud(String tplCategory) {
-        return tplCategory != null && StringUtils.equals(GenConstants.TPL_CRUD, tplCategory);
+        return TplCategory.isCrud(tplCategory);
     }
 
     public boolean isSuperColumn(String javaField) {

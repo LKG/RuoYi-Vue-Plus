@@ -1,6 +1,6 @@
 package org.dromara.generator.constant;
 
-import org.dromara.generator.enums.CodegenTemplateType;
+import org.dromara.generator.enums.TplCategory;
 
 /**
  * 代码生成通用常量
@@ -8,15 +8,15 @@ import org.dromara.generator.enums.CodegenTemplateType;
  * @author ruoyi
  */
 public interface GenConstants {
-    /**
-     * 单表（增删改查）
-     */
-    String TPL_CRUD = "crud";
-
-    /**
-     * 树表（增删改查）
-     */
-    String TPL_TREE =  CodegenTemplateType.TREE.getCode();;
+//    /**
+//     * 单表（增删改查）
+//     */
+//    String TPL_CRUD = TplCategory.ONE.getCode();
+//
+//    /**
+//     * 树表（增删改查）
+//     */
+//    String TPL_TREE =  TplCategory.TREE.getCode();
 
     /**
      * 树编码字段
