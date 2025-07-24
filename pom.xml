@@ -129,7 +129,7 @@
                 <artifactId>bizlog-sdk</artifactId>
                 <version>${bizlog-sdk.version}</version>
                 <exclusions>
-                    <exclusion> <!-- 排除掉springboot依赖使用项目的 -->
+                    <exclusion> <!-- 排除掉springboot依赖 -->
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-starter</artifactId>
                     </exclusion>
@@ -428,6 +428,21 @@
             <dependency>
                 <groupId>org.dromara</groupId>
                 <artifactId>ruoyi-edu</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dromara</groupId>
+                <artifactId>ruoyi-crm</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dromara</groupId>
+                <artifactId>ruoyi-ai</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dromara</groupId>
+                <artifactId>ruoyi-pay</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

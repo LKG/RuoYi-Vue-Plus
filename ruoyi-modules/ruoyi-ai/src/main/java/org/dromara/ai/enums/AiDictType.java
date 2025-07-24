@@ -2,6 +2,7 @@ package org.dromara.ai.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.dromara.ai.AiConstants;
 import org.dromara.common.core.enums.BaseEnum;
 
 
@@ -12,7 +13,7 @@ import org.dromara.common.core.enums.BaseEnum;
  */
 @Getter
 @RequiredArgsConstructor
-public enum AiDictType implements BaseEnum<String> {
+public enum AiDictType implements BaseEnum<String>, AiConstants {
 
     /**
      * AI 写作格式

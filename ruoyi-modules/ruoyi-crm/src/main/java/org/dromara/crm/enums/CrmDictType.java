@@ -3,16 +3,17 @@ package org.dromara.crm.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.dromara.common.core.enums.BaseEnum;
+import org.dromara.crm.CrmConstants;
 
 
 /**
  * CRM 字典类型的枚举类
  *
- * @author 芋道源码
+ * @author gg
  */
 @Getter
 @RequiredArgsConstructor
-public enum CrmDictType implements BaseEnum<String> {
+public enum CrmDictType implements BaseEnum<String>, CrmConstants {
 
 
     /**

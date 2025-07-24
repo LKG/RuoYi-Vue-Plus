@@ -6,7 +6,11 @@ package org.dromara.common.core.constant;
  * @author ruoyi
  */
 public interface Constants {
-
+    String ANCESTORS_CODE = "ancestors";
+    /**
+     * 根祖级列表
+     */
+    String ROOT_ANCESTORS = "0";
     /**
      * UTF-8 字符集
      */

@@ -16,6 +16,7 @@ mybatis-flex
 * 适配  dy-java  https://gitee.com/dromara/dy-java
 * 适配  easy-trans-anno 
 * 适配  transmittable-thread-local
+* 适配  mzt-biz-log
 ## 添加技术栈
 | 名称                                                                             | 版本         | 简介                                                                                      |
 |:-------------------------------------------------------------------------------|:-----------|:----------------------------------------------------------------------------------------|
@@ -28,6 +29,7 @@ mybatis-flex
 | Easy Captcha                                                                   | 1.6.2      | Java 图形验证码，支持 gif、中文、算术等类型，可用于 Java Web、JavaSE 等项目。                                     |
 | [dy-java](https://gitee.com/dromara/dy-java)                                   | 1.0.0      | DyJava 是一款功能强大的抖音 Java 开发工具包（SDK），支持抖音各个应用 OpenAPI 快速调用，包括但不限于移动/网站应用、抖音开放平台、抖店和抖音小程序等。 |
 | [easy-trans-anno](https://gitee.com/dromara/easy_trans)                        | 3.1.2      | 数据翻译插件                                                                                  |
+| [mzt-biz-log](https://github.com/mouzt/mzt-biz-log)                        | 3.0.7      | 美团通用日志操作组件                                                                              |
 
 
 

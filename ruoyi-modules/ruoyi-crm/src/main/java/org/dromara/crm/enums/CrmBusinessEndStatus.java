@@ -12,7 +12,7 @@ import org.dromara.common.core.enums.BaseEnum;
  */
 @RequiredArgsConstructor
 @Getter
-public enum CrmBusinessEndStatus implements BaseEnum<String> {
+public enum CrmBusinessEndStatus implements BaseEnum<Integer> {
 
     WIN(1, "赢单"),
     LOSE(2, "输单"),
@@ -22,8 +22,9 @@ public enum CrmBusinessEndStatus implements BaseEnum<String> {
      */
     private final Integer value;
     /**
-     * 状态描述CrmPermissionLevelEnum.java
+     * 状态描述
      */
     private final String description;
+
 
 }
