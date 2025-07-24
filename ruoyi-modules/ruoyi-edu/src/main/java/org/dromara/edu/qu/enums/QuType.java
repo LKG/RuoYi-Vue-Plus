@@ -7,7 +7,7 @@ import org.dromara.common.core.enums.BaseEnum;
 
 /**
  * @author gg
- * 考题类型枚举
+ * 试题类型枚举
  */
 
 @Getter
@@ -20,8 +20,8 @@ public enum QuType implements BaseEnum<Integer> {
     RADIO(1,"单选题"),
     MULTI(2,"多选题"),
     JUDGE(3,"判断题"),
-    ANSWER(4,"简答"),
-    FULLING(5,"填空"),
+    ANSWER(4,"简答题"),
+    FULLING(5,"填空题"),
     ;
 
     private final Integer value;

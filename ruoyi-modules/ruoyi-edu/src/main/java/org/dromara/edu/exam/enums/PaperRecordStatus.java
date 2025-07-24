@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.dromara.common.core.enums.BaseEnum;
 
 /**
- * 答卷状态
+ * 考卷状态
  * @author gg
  */
 @Getter
@@ -17,7 +17,7 @@ public enum PaperRecordStatus implements BaseEnum<Integer> {
      */
     PENDING(1,"待批改"),
     /**
-     * 已批改ClassWay
+     * 已批改
      */
     SUCCESS(2,"已批改"),
     ;

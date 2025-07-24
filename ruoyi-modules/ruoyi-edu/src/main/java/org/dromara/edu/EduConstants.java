@@ -5,5 +5,5 @@ package org.dromara.edu;
  * edu 常量
  */
 public interface EduConstants {
-    String DICT_PREFIX="deu_";
+    String DICT_PREFIX="edu_";
 }
