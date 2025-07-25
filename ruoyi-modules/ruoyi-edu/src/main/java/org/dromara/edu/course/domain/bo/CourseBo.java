@@ -40,7 +40,7 @@ public class CourseBo extends BaseEntity {
     /**
      * 是否置顶
      */
-    private Boolean isTop;
+    private Integer isTop;
 
     /**
      * 是否必修课
@@ -112,7 +112,7 @@ public class CourseBo extends BaseEntity {
     private Date publishTime;
 
     /**
-     * 通知范围（1：所有人；2：指定部门;3：指定用户）
+     * 通知范围（0：所有人；1：指定部门;2：指定用户）
      */
     @NotBlank(message = "通知范围不能为空", groups = { AddGroup.class, EditGroup.class })
     private Integer noticeScope;

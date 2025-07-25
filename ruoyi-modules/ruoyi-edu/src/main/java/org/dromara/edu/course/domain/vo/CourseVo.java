@@ -52,7 +52,7 @@ public class CourseVo implements Serializable {
      * 是否置顶
      */
     @ExcelProperty(value = "是否置顶")
-    private Boolean isTop;
+    private Integer isTop;
 
     /**
      * 是否必修课
@@ -134,7 +134,7 @@ public class CourseVo implements Serializable {
     private Date publishTime;
 
     /**
-     * 通知范围（1：所有人；2：指定部门;3：指定用户）
+     * 通知范围（0：所有人；1：指定部门;2：指定用户）
      */
     @ExcelProperty(value = "通知范围", converter = ExcelDictConvert.class)
     @ExcelDictFormat(dictType = "notice_scope")

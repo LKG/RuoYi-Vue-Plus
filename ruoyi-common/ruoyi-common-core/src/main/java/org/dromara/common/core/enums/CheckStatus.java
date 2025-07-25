@@ -16,7 +16,7 @@ public enum CheckStatus implements BaseEnum<Integer> {
      * 未提交
      */
     PENDING(0,"未提交"),
-
+    
     /**
      * 审批中
      */
