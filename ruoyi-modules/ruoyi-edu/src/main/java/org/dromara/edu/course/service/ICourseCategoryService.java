@@ -1,5 +1,6 @@
 package org.dromara.edu.course.service;
 
+import cn.hutool.core.lang.tree.Tree;
 import org.dromara.edu.course.domain.vo.CourseCategoryVo;
 import org.dromara.edu.course.domain.bo.CourseCategoryBo;
 
@@ -31,6 +32,13 @@ public interface ICourseCategoryService {
      */
     List<CourseCategoryVo> queryList(CourseCategoryBo bo);
 
+    /**
+     * 查询符合条件的课程分类树
+     * @param bo 查询条件
+     * @return 课程分类树
+     */
+    List<Tree<Long>> selectCateTreeList(CourseCategoryBo bo);
+    List<Tree<Long>> buildCateTreeSelect(List<CourseCategoryVo> cateList);
     /**
      * 新增课程分类管理
      *

@@ -2,6 +2,7 @@ package org.dromara.edu.course.controller;
 
 import java.util.List;
 
+import cn.hutool.core.lang.tree.Tree;
 import lombok.RequiredArgsConstructor;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.*;
@@ -33,6 +34,14 @@ import org.dromara.edu.course.service.ICourseCategoryService;
 public class CourseCategoryController extends BaseController {
 
     private final ICourseCategoryService courseCategoryService;
+    /**
+     * 获取部门树列表
+     */
+    @SaCheckPermission("edu:courseCategory:list")
+    @GetMapping("/tree")
+    public R<List<Tree<Long>>> cateTree(CourseCategoryBo bo) {
+        return R.ok(courseCategoryService.selectCateTreeList(bo));
+    }
 
     /**
      * 查询课程分类管理列表

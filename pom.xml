@@ -53,6 +53,7 @@
         <poi-ooxml.version>5.4.1</poi-ooxml.version>
         <poi.version>5.4.1</poi.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
+        <spel-validator.version>0.5.2-beta</spel-validator.version>
         <crane4j.version>2.9.0</crane4j.version>
         <knife4j.version>4.5.0</knife4j.version>
         <tlog.version>1.5.2</tlog.version>
@@ -118,6 +119,24 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
+            <!-- Zip4j (开源的 Java 处理 zip 压缩文件的开发包) -->
+            <dependency>
+                <groupId>net.lingala.zip4j</groupId>
+                <artifactId>zip4j</artifactId>
+                <version>${zip4j.version}</version>
+            </dependency>
+            <!-- TrueLicense (一个开源的证书管理引擎)-->
+            <dependency>
+                <groupId>de.schlichtherle.truelicense</groupId>
+                <artifactId>truelicense-core</artifactId>
+                <version>${truelicense.version}</version>
+            </dependency>
+            <!-- SpEL Validator（基于 SpEL 的 jakarta.validation-api 扩展增强包） -->
+            <dependency>
+                <groupId>cn.sticki</groupId>
+                <artifactId>spel-validator-jakarta</artifactId>
+                <version>${spel-validator.version}</version>
+            </dependency>
             <!-- 解决 ThreadLocal 父子线程的传值问题 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -453,9 +472,6 @@
         <module>ruoyi-common</module>
         <module>ruoyi-extend</module>
         <module>ruoyi-modules</module>
-        <module>ruoyi-modules/ruoyi-crm</module>
-        <module>ruoyi-modules/ruoyi-ai</module>
-        <module>ruoyi-modules/ruoyi-cms</module>
     </modules>
     <packaging>pom</packaging>
 

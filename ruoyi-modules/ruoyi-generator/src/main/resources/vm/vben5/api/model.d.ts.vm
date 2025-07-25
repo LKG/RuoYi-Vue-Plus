@@ -1,4 +1,4 @@
-﻿import type { PageQuery, BaseEntity } from '#/api/common';
+﻿import type { BaseEntity ,PageQuery } from '#/api/common';
 
 export interface ${BusinessName}VO {
 #foreach ($column in $columns)
@@ -6,7 +6,7 @@ export interface ${BusinessName}VO {
   /**
    * $column.columnComment
    */
-  $column.javaField:#if($column.javaField.indexOf("id") != -1 || $column.javaField.indexOf("Id") != -1) string | number;
+  $column.javaField:#if($column.javaField.indexOf("id") != -1 || $column.javaField.indexOf("Id") != -1) number | string;
                         #elseif($column.javaType == 'Long' || $column.javaType == 'Integer' || $column.javaType == 'Double' || $column.javaType == 'Float' || $column.javaType == 'BigDecimal') number;
                         #elseif($column.javaType == 'Boolean') boolean;
                         #else string;
@@ -27,7 +27,7 @@ export interface ${BusinessName}Form extends BaseEntity {
   /**
    * $column.columnComment
    */
-  $column.javaField?:#if($column.javaField.indexOf("id") != -1 || $column.javaField.indexOf("Id") != -1) string | number;
+  $column.javaField?:#if($column.javaField.indexOf("id") != -1 || $column.javaField.indexOf("Id") != -1) number | string;
                         #elseif($column.javaType == 'Long' || $column.javaType == 'Integer' || $column.javaType == 'Double' || $column.javaType == 'Float' || $column.javaType == 'BigDecimal') number;
                         #elseif($column.javaType == 'Boolean') boolean;
                         #else string;
@@ -42,7 +42,7 @@ export interface ${BusinessName}Query #if(!${treeCode})extends PageQuery #end{
   /**
    * $column.columnComment
    */
-  $column.javaField?:#if($column.javaField.indexOf("id") != -1 || $column.javaField.indexOf("Id") != -1) string | number;
+  $column.javaField?:#if($column.javaField.indexOf("id") != -1 || $column.javaField.indexOf("Id") != -1) number | string;
                         #elseif($column.javaType == 'Long' || $column.javaType == 'Integer' || $column.javaType == 'Double' || $column.javaType == 'Float' || $column.javaType == 'BigDecimal') number;
                         #elseif($column.javaType == 'Boolean') boolean;
                         #else string;

@@ -20,18 +20,20 @@
             <groupId>org.dromara</groupId>
             <artifactId>ruoyi-common-core</artifactId>
         </dependency>
-
-        <!-- JSON工具类 -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <groupId>org.dromara</groupId>
+            <artifactId>ruoyi-common-json</artifactId>
         </dependency>
-
+        <!-- TrueLicense (一个开源的证书管理引擎)-->
         <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
+            <groupId>de.schlichtherle.truelicense</groupId>
+            <artifactId>truelicense-core</artifactId>
         </dependency>
-
+        <!-- Zip4j (开源的 Java 处理 zip 压缩文件的开发包) -->
+        <dependency>
+            <groupId>net.lingala.zip4j</groupId>
+            <artifactId>zip4j</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

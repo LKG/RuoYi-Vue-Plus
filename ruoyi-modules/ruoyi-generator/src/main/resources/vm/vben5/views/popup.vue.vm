@@ -45,7 +45,6 @@ const { onBeforeClose, markInitialized, resetInitialized } = useBeforeCloseDiff(
 const [Basic${PopupComponent}, ${popupComponent}Api] = useVben${PopupComponent}({
   // 在这里更改宽度
   class: 'w-[550px]',
-  fullscreenButton: false,
   onBeforeClose,
   onClosed: handleClosed,
   onConfirm: handleConfirm,
@@ -279,8 +278,8 @@ async function handleClosed() {
       </FormItem>
 #elseif($column.htmlType == "editor")
       <FormItem label="${comment}" v-bind="validateInfos.${field}">
-        <Tinymce 
-          :disabled="false" 
+        <Tinymce
+          :disabled="false"
           v-model="formData.${field}"
         />
       </FormItem>
@@ -308,7 +307,7 @@ async function handleClosed() {
       </FormItem>
 #elseif($column.htmlType == "checkbox" && "" != $dictType)
       <FormItem label="${comment}" v-bind="validateInfos.${field}">
-        <CheckboxGroup 
+        <CheckboxGroup
           v-model:value="formData.${field}"
           #if($column.javaType == "Integer" || $column.javaType == "Long")
           :options="getDictOptions('$dictType', true)"
@@ -319,8 +318,8 @@ async function handleClosed() {
       </FormItem>
 #elseif($column.htmlType == "checkbox" && "" == $dictType)
       <FormItem label="${comment}" v-bind="validateInfos.${field}">
-        <CheckboxGroup 
-          v-model:value="formData.${field}" 
+        <CheckboxGroup
+          v-model:value="formData.${field}"
           :options="[]"
         />
       </FormItem>
@@ -349,7 +348,7 @@ async function handleClosed() {
 #elseif($column.htmlType == "datetime")
       <FormItem label="${comment}" v-bind="validateInfos.${field}">
         <!-- 需要自行调整参数 -->
-        <DatePicker 
+        <DatePicker
           v-model:value="formData.${field}"
           format="YYYY-MM-DD HH:mm:ss"
           value-format="YYYY-MM-DD HH:mm:ss"
@@ -357,10 +356,10 @@ async function handleClosed() {
       </FormItem>
 #elseif($column.htmlType == "textarea")
       <FormItem label="${comment}" v-bind="validateInfos.${field}">
-        <Textarea 
-          v-model:value="formData.${field}" 
-          :placeholder="$t('ui.formRules.required')" 
-          :rows="4" 
+        <Textarea
+          v-model:value="formData.${field}"
+          :placeholder="$t('ui.formRules.required')"
+          :rows="4"
         />
       </FormItem>
 #end

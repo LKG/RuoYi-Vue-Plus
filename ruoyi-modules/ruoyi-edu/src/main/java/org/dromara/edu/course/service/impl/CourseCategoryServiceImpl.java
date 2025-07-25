@@ -1,15 +1,18 @@
 package org.dromara.edu.course.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.common.core.constant.Constants;
+import org.dromara.common.core.constant.SystemConstants;
 import org.dromara.common.core.exception.ServiceException;
 import org.dromara.common.core.utils.MapstructUtils;
 import org.dromara.common.core.utils.StringUtils;
+import org.dromara.common.core.utils.TreeBuildUtils;
 import org.dromara.common.mybatis.helper.DataBaseHelper;
 import org.dromara.common.redis.utils.CacheUtils;
 import org.dromara.edu.EduCacheNames;
@@ -62,6 +65,40 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
         return baseMapper.selectVoList(lqw);
     }
 
+    /**
+     * 查询符合条件的课程分类树
+     * @param bo 查询条件
+     * @return 课程分类树
+     */
+    @Override
+    public List<Tree<Long>> selectCateTreeList(CourseCategoryBo bo) {
+        LambdaQueryWrapper<CourseCategory> lqw = buildQueryWrapper(bo);
+        List<CourseCategoryVo> cateList = baseMapper.selectVoList(lqw);
+        return buildCateTreeSelect(cateList);
+    }
+    /**
+     * 构建前端所需要下拉树结构
+     *
+     * @param cateList 分类列表
+     * @return 下拉树结构列表
+     */
+    @Override
+    public List<Tree<Long>> buildCateTreeSelect(List<CourseCategoryVo> cateList) {
+        if (CollUtil.isEmpty(cateList)) {
+            return CollUtil.newArrayList();
+        }
+        return TreeBuildUtils.buildMultiRoot(
+            cateList,
+            CourseCategoryVo::getId,
+            CourseCategoryVo::getParentId,
+            (node, treeNode) -> treeNode
+                .setId(node.getId())
+                .setParentId(node.getParentId())
+                .setName(node.getName())
+                .setWeight(node.getSortNum())
+//                .putExtra("disabled", SystemConstants.DISABLE.equals(node.getStatus()))
+        );
+    }
     private LambdaQueryWrapper<CourseCategory> buildQueryWrapper(CourseCategoryBo bo) {
         Map<String, Object> params = bo.getParams();
         LambdaQueryWrapper<CourseCategory> lqw = Wrappers.lambdaQuery();
