@@ -41,6 +41,7 @@ import org.dromara.web.domain.vo.TenantListVo;
 import org.dromara.web.service.IAuthStrategy;
 import org.dromara.web.service.SysLoginService;
 import org.dromara.web.service.SysRegisterService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -208,8 +209,9 @@ public class AuthController {
         if (!enable) {
             return R.ok(result);
         }
-
-        List<SysTenantVo> tenantList = tenantService.queryList(new SysTenantBo());
+        SysTenantBo bo= new SysTenantBo();
+        bo.setStatus("0");
+        List<SysTenantVo> tenantList = tenantService.queryList(bo);
         List<TenantListVo> voList = MapstructUtils.convert(tenantList, TenantListVo.class);
         try {
             // 如果只超管返回所有租户
@@ -222,7 +224,8 @@ public class AuthController {
 
         // 获取域名
         String host;
-        String referer = request.getHeader("referer");
+
+        String referer = request.getHeader(HttpHeaders.REFERER);
         if (StringUtils.isNotBlank(referer)) {
             // 这里从referer中取值是为了本地使用hosts添加虚拟域名，方便本地环境调试
             host = referer.split("//")[1].split("/")[0];

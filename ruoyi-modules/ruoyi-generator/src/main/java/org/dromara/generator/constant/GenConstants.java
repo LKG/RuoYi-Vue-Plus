@@ -8,15 +8,6 @@ import org.dromara.generator.enums.TplCategory;
  * @author ruoyi
  */
 public interface GenConstants {
-//    /**
-//     * 单表（增删改查）
-//     */
-//    String TPL_CRUD = TplCategory.ONE.getCode();
-//
-//    /**
-//     * 树表（增删改查）
-//     */
-//    String TPL_TREE =  TplCategory.TREE.getCode();
 
     /**
      * 树编码字段
@@ -46,49 +37,49 @@ public interface GenConstants {
     /**
      * 数据库字符串类型
      */
-    String[] COLUMNTYPE_STR = {"char", "varchar", "enum", "set", "nchar", "nvarchar", "varchar2", "nvarchar2"};
+    String[] COLUMN_TYPE_STR = {"char", "varchar", "enum", "set", "nchar", "nvarchar", "varchar2", "nvarchar2"};
 
     /**
      * 数据库文本类型
      */
-    String[] COLUMNTYPE_TEXT = {"tinytext", "text", "mediumtext", "longtext", "binary", "varbinary", "blob",
+    String[] COLUMN_TYPE_TEXT = {"tinytext", "text", "mediumtext", "longtext", "binary", "varbinary", "blob",
         "ntext", "image", "bytea"};
 
     /**
      * 数据库时间类型
      */
-    String[] COLUMNTYPE_TIME = {"datetime", "time", "date", "timestamp", "year", "interval",
+    String[] COLUMN_TYPE_TIME = {"datetime", "time", "date", "timestamp", "year", "interval",
         "smalldatetime", "datetime2", "datetimeoffset", "timestamptz"};
 
     /**
      * 数据库数字类型
      */
-    String[] COLUMNTYPE_NUMBER = {"tinyint", "smallint", "mediumint", "int", "int2", "int4", "int8", "number", "integer",
+    String[] COLUMN_TYPE_NUMBER = {"tinyint", "smallint", "mediumint", "int", "int2", "int4", "int8", "number", "integer",
         "bit", "bigint", "float", "float4", "float8", "double", "decimal", "numeric", "real", "double precision",
         "smallserial", "serial", "bigserial", "money", "smallmoney"};
 
     /**
      * BO对象 不需要添加字段
      */
-    String[] COLUMNNAME_NOT_ADD = {"create_dept", "create_by", "create_time", "del_flag", "update_by",
+    String[] COLUMN_NAME_NOT_ADD = {"create_dept", "create_by", "create_time", "del_flag", "update_by",
         "update_time", "version", "tenant_id"};
 
     /**
      * BO对象 不需要编辑字段
      */
-    String[] COLUMNNAME_NOT_EDIT = {"create_dept", "create_by", "create_time", "del_flag", "update_by",
+    String[] COLUMN_NAME_NOT_EDIT = {"create_dept", "create_by", "create_time", "del_flag", "update_by",
         "update_time", "version", "tenant_id"};
 
     /**
      * VO对象 不需要返回字段
      */
-    String[] COLUMNNAME_NOT_LIST = {"create_dept", "create_by", "create_time", "del_flag", "update_by",
+    String[] COLUMN_NAME_NOT_LIST = {"create_dept", "create_by", "create_time", "del_flag", "update_by",
         "update_time", "version", "tenant_id"};
 
     /**
      * BO对象 不需要查询字段
      */
-    String[] COLUMNNAME_NOT_QUERY = {"id", "create_dept", "create_by", "create_time", "del_flag", "update_by",
+    String[] COLUMN_NAME_NOT_QUERY = {"id", "create_dept", "create_by", "create_time", "del_flag", "update_by",
         "update_time", "remark", "version", "tenant_id"};
 
     /**

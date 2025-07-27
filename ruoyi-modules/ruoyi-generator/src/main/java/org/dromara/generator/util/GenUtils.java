@@ -49,15 +49,15 @@ public class GenUtils {
         column.setJavaType(GenConstants.TYPE_STRING);
         column.setQueryType(GenConstants.QUERY_EQ);
 
-        if (arraysContains(GenConstants.COLUMNTYPE_STR, dataType) || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType)) {
+        if (arraysContains(GenConstants.COLUMN_TYPE_STR, dataType) || arraysContains(GenConstants.COLUMN_TYPE_TEXT, dataType)) {
             // 字符串长度超过500设置为文本域
             Integer columnLength = getColumnLength(column.getColumnType());
-            String htmlType = columnLength >= 500 || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType) ? GenConstants.HTML_TEXTAREA : GenConstants.HTML_INPUT;
+            String htmlType = columnLength >= 500 || arraysContains(GenConstants.COLUMN_TYPE_TEXT, dataType) ? GenConstants.HTML_TEXTAREA : GenConstants.HTML_INPUT;
             column.setHtmlType(htmlType);
-        } else if (arraysContains(GenConstants.COLUMNTYPE_TIME, dataType)) {
+        } else if (arraysContains(GenConstants.COLUMN_TYPE_TIME, dataType)) {
             column.setJavaType(GenConstants.TYPE_DATE);
             column.setHtmlType(GenConstants.HTML_DATETIME);
-        } else if (arraysContains(GenConstants.COLUMNTYPE_NUMBER, dataType)) {
+        } else if (arraysContains(GenConstants.COLUMN_TYPE_NUMBER, dataType)) {
             column.setHtmlType(GenConstants.HTML_INPUT);
             // 数据库的数字字段与java不匹配 且很多数据库的数字字段很模糊 例如oracle只有number没有细分
             // 所以默认数字类型全为Long可在界面上自行编辑想要的类型 有什么特殊需求也可以在这里特殊处理
@@ -65,19 +65,19 @@ public class GenUtils {
         }
 
         // BO对象 默认插入勾选
-        if (!arraysContains(GenConstants.COLUMNNAME_NOT_ADD, columnName) && !column.isPk()) {
+        if (!arraysContains(GenConstants.COLUMN_NAME_NOT_ADD, columnName) && !column.isPk()) {
             column.setIsInsert(GenConstants.REQUIRE);
         }
         // BO对象 默认编辑勾选
-        if (!arraysContains(GenConstants.COLUMNNAME_NOT_EDIT, columnName)) {
+        if (!arraysContains(GenConstants.COLUMN_NAME_NOT_EDIT, columnName)) {
             column.setIsEdit(GenConstants.REQUIRE);
         }
         // VO对象 默认返回勾选
-        if (!arraysContains(GenConstants.COLUMNNAME_NOT_LIST, columnName)) {
+        if (!arraysContains(GenConstants.COLUMN_NAME_NOT_LIST, columnName)) {
             column.setIsList(GenConstants.REQUIRE);
         }
         // BO对象 默认查询勾选
-        if (!arraysContains(GenConstants.COLUMNNAME_NOT_QUERY, columnName) && !column.isPk()) {
+        if (!arraysContains(GenConstants.COLUMN_NAME_NOT_QUERY, columnName) && !column.isPk()) {
             column.setIsQuery(GenConstants.REQUIRE);
         }
 

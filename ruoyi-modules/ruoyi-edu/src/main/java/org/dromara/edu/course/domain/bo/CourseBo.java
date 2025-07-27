@@ -30,6 +30,7 @@ public class CourseBo extends BaseEntity {
     /**
      * 标题
      */
+    @NotNull(message = "标题不能为空", groups = { AddGroup.class, EditGroup.class })
     private String title;
 
     /**
@@ -72,13 +73,11 @@ public class CourseBo extends BaseEntity {
     /**
      * 所属标签
      */
-    @NotBlank(message = "所属标签不能为空", groups = { AddGroup.class, EditGroup.class })
-    private String tagIds;
+   private String tagIds;
 
     /**
      * 课程描述
      */
-    @NotBlank(message = "课程描述不能为空", groups = { AddGroup.class, EditGroup.class })
     private String description;
 
     /**
@@ -114,7 +113,7 @@ public class CourseBo extends BaseEntity {
     /**
      * 通知范围（0：所有人；1：指定部门;2：指定用户）
      */
-    @NotBlank(message = "通知范围不能为空", groups = { AddGroup.class, EditGroup.class })
+    @NotNull(message = "通知范围不能为空", groups = { AddGroup.class, EditGroup.class })
     private Integer noticeScope;
 
     /**
