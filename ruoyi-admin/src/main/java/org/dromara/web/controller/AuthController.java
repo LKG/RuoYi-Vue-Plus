@@ -18,6 +18,7 @@ import org.dromara.common.core.domain.R;
 import org.dromara.common.core.domain.model.LoginBody;
 import org.dromara.common.core.domain.model.RegisterBody;
 import org.dromara.common.core.domain.model.SocialLoginBody;
+import org.dromara.common.core.enums.Status;
 import org.dromara.common.core.utils.*;
 import org.dromara.common.encrypt.annotation.ApiEncrypt;
 import org.dromara.common.json.utils.JsonUtils;
@@ -210,7 +211,7 @@ public class AuthController {
             return R.ok(result);
         }
         SysTenantBo bo= new SysTenantBo();
-        bo.setStatus("0");
+        bo.setStatus(Status.NORMAL.getValue());
         List<SysTenantVo> tenantList = tenantService.queryList(bo);
         List<TenantListVo> voList = MapstructUtils.convert(tenantList, TenantListVo.class);
         try {

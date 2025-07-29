@@ -92,7 +92,7 @@ public class SysTenant extends BaseEntity {
     /**
      * 租户状态（0正常 1停用）
      */
-    private String status;
+    private Integer status;
 
     /**
      * 删除标志（0代表存在 1代表删除）

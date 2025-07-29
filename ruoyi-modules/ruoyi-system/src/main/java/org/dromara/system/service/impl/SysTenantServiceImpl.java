@@ -107,7 +107,8 @@ public class SysTenantServiceImpl implements ISysTenantService {
         lqw.eq(bo.getPackageId() != null, SysTenant::getPackageId, bo.getPackageId());
         lqw.eq(bo.getExpireTime() != null, SysTenant::getExpireTime, bo.getExpireTime());
         lqw.eq(bo.getAccountCount() != null, SysTenant::getAccountCount, bo.getAccountCount());
-        lqw.eq(StringUtils.isNotBlank(bo.getStatus()), SysTenant::getStatus, bo.getStatus());
+        Optional.ofNullable(bo.getStatus())
+            .ifPresent(status -> lqw.eq(SysTenant::getStatus, status));
         lqw.orderByAsc(SysTenant::getId);
         return lqw;
     }
