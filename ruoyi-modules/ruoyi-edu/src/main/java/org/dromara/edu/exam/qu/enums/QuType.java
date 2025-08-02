@@ -1,4 +1,4 @@
-package org.dromara.edu.qu.enums;
+package org.dromara.edu.exam.qu.enums;
 
 
 import lombok.Getter;

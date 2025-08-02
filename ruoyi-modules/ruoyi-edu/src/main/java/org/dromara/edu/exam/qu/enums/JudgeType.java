@@ -1,4 +1,4 @@
-package org.dromara.edu.course.enums;
+package org.dromara.edu.exam.qu.enums;
 
 
 import lombok.Getter;
@@ -6,27 +6,21 @@ import lombok.RequiredArgsConstructor;
 import org.dromara.common.core.enums.BaseEnum;
 
 /**
- * 课程类型
- *
  * @author gg
+ * 试题类型枚举
  */
+
 @Getter
 @RequiredArgsConstructor
-public enum CourseType implements BaseEnum<Integer> {
+public enum JudgeType implements BaseEnum<Integer> {
 
     /**
-     * 视频
+     * 题目类型：1 正确  0 错误
      */
-    VIDEO(1,"视频"),
-
-    /**
-     * 音频
-     */
-    AUDIO(2, "音频"),
-    DOC(3,"文档"),
-    IMAGE(4, "图片"),
+    TRUE(1,"正确"),
+    FALSE(0,"错误"),
     ;
-
     private final Integer value;
+
     private final String description;
 }

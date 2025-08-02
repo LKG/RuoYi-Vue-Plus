@@ -23,6 +23,8 @@ public enum ExamDictType implements BaseEnum<String> , ExamConstants {
     PAPER_TYPE("paper_type","试卷类型"),
     PAPER_RECORD_STATUS("paper_record_status","答卷状态"),
     QU_SOURCE_TYPE("qu_source_type","试题来源"),
+    QU_TYPE("qu_type","考题类型"),
+
     ;
     private final String value;
     private final String description;
