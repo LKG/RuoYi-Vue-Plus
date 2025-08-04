@@ -44,7 +44,7 @@ public class CoursePeriodVo implements Serializable {
      * 排序号
      */
     @ExcelProperty(value = "排序号")
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 关联章节id

@@ -180,6 +180,16 @@ public class VelocityUtils {
             templates.add("vm/vben5/views/index_vben_tree.vue.vm");
             templates.add("vm/vben5/views/popup_tree.vue.vm");
         }else if(TplCategory.isMaster(tplCategory)) {
+            templates.add("vm/vben5/views/index_vben.vue.vm");
+            templates.add("vm/vben5/views/popup.vue.vm");
+            templates.add("vm/vben5/views/modules/form_sub_erp.vue.vm");
+            templates.add("vm/vben5/views/modules/form_sub_inner.vue.vm");
+            templates.add("vm/vben5/views/modules/form_sub_normal.vue.vm");
+            templates.add("vm/vben5/views/modules/list_sub_erp.vue.vm");
+            templates.add("vm/vben5/views/modules/list_sub_inner.vue.vm");
+        }else if(TplCategory.isSub(tplCategory)) {
+            templates.add("vm/vben5/views/index_vben.vue.vm");
+            templates.add("vm/vben5/views/popup.vue.vm");
             templates.add("vm/vben5/views/modules/form_sub_erp.vue.vm");
             templates.add("vm/vben5/views/modules/form_sub_inner.vue.vm");
             templates.add("vm/vben5/views/modules/form_sub_normal.vue.vm");

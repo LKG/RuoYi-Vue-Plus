@@ -45,14 +45,13 @@ public class QuestionsOptionsBo extends BaseEntity {
     /**
      * 答案
      */
-    @NotBlank(message = "答案不能为空", groups = { AddGroup.class, EditGroup.class })
     private String answer;
 
     /**
      * 排序字段
      */
     @NotNull(message = "排序字段不能为空", groups = { AddGroup.class, EditGroup.class })
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 选项key

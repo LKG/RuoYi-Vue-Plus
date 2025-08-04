@@ -62,7 +62,7 @@ public class QuestionsOptionsVo implements Serializable {
      * 排序字段
      */
     @ExcelProperty(value = "排序字段")
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 选项key

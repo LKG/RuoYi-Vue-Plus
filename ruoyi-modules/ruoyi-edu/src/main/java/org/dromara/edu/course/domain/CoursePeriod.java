@@ -35,7 +35,7 @@ public class CoursePeriod extends TenantEntity {
     /**
      * 排序号
      */
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 关联章节id

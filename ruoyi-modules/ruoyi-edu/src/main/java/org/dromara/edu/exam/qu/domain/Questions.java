@@ -35,7 +35,7 @@ public class Questions extends TenantEntity {
     /**
      * 题目类型：1.单选、2.多选、3.判断、4.简答、5.填空
      */
-    private Long questionsType;
+    private Integer questionsType;
 
     /**
      * 正确选项

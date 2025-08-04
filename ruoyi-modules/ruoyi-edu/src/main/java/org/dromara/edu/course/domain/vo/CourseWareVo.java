@@ -44,7 +44,7 @@ public class CourseWareVo implements Serializable {
      * 排序号
      */
     @ExcelProperty(value = "排序号")
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 描述

@@ -34,7 +34,7 @@ public class CourseWareBo extends BaseEntity {
      * 排序号
      */
     @NotNull(message = "排序号不能为空", groups = { AddGroup.class, EditGroup.class })
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 描述

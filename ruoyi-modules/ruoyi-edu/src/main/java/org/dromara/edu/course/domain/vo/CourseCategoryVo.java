@@ -47,7 +47,7 @@ public class CourseCategoryVo implements Serializable {
      * 排序号
      */
     @ExcelProperty(value = "排序号")
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 分类层级

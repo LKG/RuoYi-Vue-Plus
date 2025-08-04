@@ -1,5 +1,6 @@
 package org.dromara.edu.exam.qu.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import org.dromara.common.core.utils.MapstructUtils;
 import org.dromara.common.core.utils.StringUtils;
 import org.dromara.common.mybatis.core.page.TableDataInfo;
@@ -9,6 +10,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.edu.exam.qu.domain.bo.QuestionsOptionsBo;
+import org.dromara.edu.exam.qu.enums.QuType;
+import org.dromara.edu.exam.qu.service.IQuestionsOptionsService;
 import org.springframework.stereotype.Service;
 import org.dromara.edu.exam.qu.domain.bo.QuestionsBo;
 import org.dromara.edu.exam.qu.domain.vo.QuestionsVo;
@@ -19,6 +23,7 @@ import org.dromara.edu.exam.qu.service.IQuestionsService;
 import java.util.List;
 import java.util.Map;
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 题库Service业务层处理
@@ -32,6 +37,8 @@ import java.util.Collection;
 public class QuestionsServiceImpl implements IQuestionsService {
 
     private final QuestionsMapper baseMapper;
+
+    private final IQuestionsOptionsService questionsOptionsService;
 
     /**
      * 查询题库
@@ -85,6 +92,20 @@ public class QuestionsServiceImpl implements IQuestionsService {
         lqw.eq(bo.getCategoryId() != null, Questions::getCategoryId, bo.getCategoryId());
         return lqw;
     }
+    private void addOptions(Long id, List<QuestionsOptionsBo> optionsList, Integer questionsType, String correctOptionKey) {
+        AtomicInteger optionsCount = new AtomicInteger(0);
+        if(CollectionUtil.isEmpty(optionsList)){
+            return;
+        }
+        for (QuestionsOptionsBo options : optionsList) {
+            options.setQuestionsId(id);
+            options.setSortNum(optionsCount.incrementAndGet());
+            if(QuType.RADIO.getValue().equals(questionsType)&& correctOptionKey.equals(options.getOptionKey())){
+                options.setAnswer(options.getOptionKey());
+            }
+            questionsOptionsService.insertByBo(options);
+        }
+    }
 
     /**
      * 新增题库
@@ -98,7 +119,9 @@ public class QuestionsServiceImpl implements IQuestionsService {
         validEntityBeforeSave(add);
         boolean flag = baseMapper.insert(add) > 0;
         if (flag) {
-            bo.setId(add.getId());
+            Long id =add.getId();
+            addOptions(id, bo.getOptionsList(), bo.getQuestionsType(), bo.getCorrectOptionKey());
+            bo.setId(id);
         }
         return flag;
     }

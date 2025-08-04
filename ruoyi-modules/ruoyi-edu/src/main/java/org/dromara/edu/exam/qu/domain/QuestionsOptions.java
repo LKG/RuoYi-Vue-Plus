@@ -50,7 +50,7 @@ public class QuestionsOptions extends TenantEntity {
     /**
      * 排序字段
      */
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 选项key

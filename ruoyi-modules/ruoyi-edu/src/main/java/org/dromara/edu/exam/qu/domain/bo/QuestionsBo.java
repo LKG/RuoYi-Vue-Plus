@@ -1,5 +1,6 @@
 package org.dromara.edu.exam.qu.domain.bo;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.dromara.edu.exam.qu.domain.Questions;
 import org.dromara.common.mybatis.core.domain.BaseEntity;
 import org.dromara.common.core.validate.AddGroup;
@@ -8,6 +9,8 @@ import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import jakarta.validation.constraints.*;
+
+import java.util.List;
 
 /**
  * 题库业务对象 exam_questions
@@ -35,7 +38,7 @@ public class QuestionsBo extends BaseEntity {
      * 题目类型：1.单选、2.多选、3.判断、4.简答、5.填空
      */
     @NotNull(message = "题目类型：1.单选、2.多选、3.判断、4.简答、5.填空不能为空", groups = { AddGroup.class, EditGroup.class })
-    private Long questionsType;
+    private Integer questionsType;
 
     /**
      * 正确选项
@@ -75,7 +78,10 @@ public class QuestionsBo extends BaseEntity {
     /**
      * 分类id
      */
+    @NotNull(message = "分类不能为空", groups = { AddGroup.class, EditGroup.class })
     private Long categoryId;
 
-
+    @NotNull
+    @Schema(description = "题目选项")
+    private List<QuestionsOptionsBo> optionsList;
 }

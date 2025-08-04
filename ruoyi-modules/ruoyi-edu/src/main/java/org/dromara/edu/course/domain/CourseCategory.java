@@ -40,7 +40,7 @@ public class CourseCategory extends TenantEntity {
     /**
      * 排序号
      */
-    private Long sortNum;
+    private Integer sortNum;
 
     /**
      * 分类层级
