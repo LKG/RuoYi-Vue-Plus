@@ -16,7 +16,7 @@ import java.io.Serial;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("edu_course_category")
-public class CourseCategory extends TenantEntity {
+public class Category extends TenantEntity {
 
     @Serial
     private static final long serialVersionUID = 1L;

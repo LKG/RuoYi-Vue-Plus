@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.common.core.constant.Constants;
-import org.dromara.common.core.constant.SystemConstants;
 import org.dromara.common.core.exception.ServiceException;
 import org.dromara.common.core.utils.MapstructUtils;
 import org.dromara.common.core.utils.StringUtils;
@@ -16,11 +15,11 @@ import org.dromara.common.core.utils.TreeBuildUtils;
 import org.dromara.common.mybatis.helper.DataBaseHelper;
 import org.dromara.common.redis.utils.CacheUtils;
 import org.dromara.edu.EduCacheNames;
-import org.dromara.edu.course.domain.CourseCategory;
-import org.dromara.edu.course.domain.bo.CourseCategoryBo;
-import org.dromara.edu.course.domain.vo.CourseCategoryVo;
-import org.dromara.edu.course.mapper.CourseCategoryMapper;
-import org.dromara.edu.course.service.ICourseCategoryService;
+import org.dromara.edu.course.domain.Category;
+import org.dromara.edu.course.domain.bo.CategoryBo;
+import org.dromara.edu.course.domain.vo.CategoryVo;
+import org.dromara.edu.course.mapper.CategoryMapper;
+import org.dromara.edu.course.service.ICategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,9 +36,9 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class CourseCategoryServiceImpl implements ICourseCategoryService {
+public class CategoryServiceImpl implements ICategoryService {
 
-    private final CourseCategoryMapper baseMapper;
+    private final CategoryMapper baseMapper;
 
     /**
      * 查询课程分类管理
@@ -48,7 +47,7 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
      * @return 课程分类管理
      */
     @Override
-    public CourseCategoryVo queryById(Long id){
+    public CategoryVo queryById(Long id){
         return baseMapper.selectVoById(id);
     }
 
@@ -60,8 +59,8 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
      * @return 课程分类管理列表
      */
     @Override
-    public List<CourseCategoryVo> queryList(CourseCategoryBo bo) {
-        LambdaQueryWrapper<CourseCategory> lqw = buildQueryWrapper(bo);
+    public List<CategoryVo> queryList(CategoryBo bo) {
+        LambdaQueryWrapper<Category> lqw = buildQueryWrapper(bo);
         return baseMapper.selectVoList(lqw);
     }
 
@@ -71,9 +70,9 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
      * @return 课程分类树
      */
     @Override
-    public List<Tree<Long>> selectCateTreeList(CourseCategoryBo bo) {
-        LambdaQueryWrapper<CourseCategory> lqw = buildQueryWrapper(bo);
-        List<CourseCategoryVo> cateList = baseMapper.selectVoList(lqw);
+    public List<Tree<Long>> selectCateTreeList(CategoryBo bo) {
+        LambdaQueryWrapper<Category> lqw = buildQueryWrapper(bo);
+        List<CategoryVo> cateList = baseMapper.selectVoList(lqw);
         return buildCateTreeSelect(cateList);
     }
     /**
@@ -83,14 +82,14 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
      * @return 下拉树结构列表
      */
     @Override
-    public List<Tree<Long>> buildCateTreeSelect(List<CourseCategoryVo> cateList) {
+    public List<Tree<Long>> buildCateTreeSelect(List<CategoryVo> cateList) {
         if (CollUtil.isEmpty(cateList)) {
             return CollUtil.newArrayList();
         }
         return TreeBuildUtils.buildMultiRoot(
             cateList,
-            CourseCategoryVo::getId,
-            CourseCategoryVo::getParentId,
+            CategoryVo::getId,
+            CategoryVo::getParentId,
             (node, treeNode) -> treeNode
                 .setId(node.getId())
                 .setParentId(node.getParentId())
@@ -99,13 +98,13 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
 //                .putExtra("disabled", SystemConstants.DISABLE.equals(node.getStatus()))
         );
     }
-    private LambdaQueryWrapper<CourseCategory> buildQueryWrapper(CourseCategoryBo bo) {
+    private LambdaQueryWrapper<Category> buildQueryWrapper(CategoryBo bo) {
         Map<String, Object> params = bo.getParams();
-        LambdaQueryWrapper<CourseCategory> lqw = Wrappers.lambdaQuery();
-        lqw.orderByAsc(CourseCategory::getId);
-        lqw.like(StringUtils.isNotBlank(bo.getName()), CourseCategory::getName, bo.getName());
-        lqw.eq(bo.getParentId() != null, CourseCategory::getParentId, bo.getParentId());
-        lqw.eq(bo.getCategoryLevel() != null, CourseCategory::getCategoryLevel, bo.getCategoryLevel());
+        LambdaQueryWrapper<Category> lqw = Wrappers.lambdaQuery();
+        lqw.orderByAsc(Category::getId);
+        lqw.like(StringUtils.isNotBlank(bo.getName()), Category::getName, bo.getName());
+        lqw.eq(bo.getParentId() != null, Category::getParentId, bo.getParentId());
+        lqw.eq(bo.getCategoryLevel() != null, Category::getCategoryLevel, bo.getCategoryLevel());
         return lqw;
     }
 
@@ -116,12 +115,12 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
      * @return 是否新增成功
      */
     @Override
-    public Boolean insertByBo(CourseCategoryBo bo) {
-        CourseCategory add = MapstructUtils.convert(bo, CourseCategory.class);
+    public Boolean insertByBo(CategoryBo bo) {
+        Category add = MapstructUtils.convert(bo, Category.class);
         assert add != null;
         String ancestors=Constants.ROOT_ANCESTORS;
         if(!bo.getParentId().equals(0L)){
-            CourseCategory info = baseMapper.selectById(bo.getParentId());
+            Category info = baseMapper.selectById(bo.getParentId());
             ancestors=info.getAncestors() + StringUtils.SEPARATOR + info.getParentId();
             add.setCategoryLevel(info.getCategoryLevel()+1);
         }
@@ -141,16 +140,16 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
      * @return 是否修改成功
      */
     @Override
-    public Boolean updateByBo(CourseCategoryBo bo) {
-        CourseCategory update = MapstructUtils.convert(bo, CourseCategory.class);
-        CourseCategory oldCategory = baseMapper.selectById(bo.getParentId());
+    public Boolean updateByBo(CategoryBo bo) {
+        Category update = MapstructUtils.convert(bo, Category.class);
+        Category oldCategory = baseMapper.selectById(bo.getParentId());
         if (ObjectUtil.isNull(oldCategory)) {
             throw new ServiceException("分类不存在，无法修改");
         }
         assert update != null;
         if (!oldCategory.getParentId().equals(update.getParentId())) {
             // 如果是新父部门 则校验是否具有新父部门权限 避免越权
-            CourseCategory newParentCategory = baseMapper.selectById(update.getParentId());
+            Category newParentCategory = baseMapper.selectById(update.getParentId());
             if (ObjectUtil.isNotNull(newParentCategory)) {
                 update.setCategoryLevel(newParentCategory.getCategoryLevel());
                 String newAncestors = newParentCategory.getAncestors() + StringUtils.SEPARATOR + newParentCategory.getId();
@@ -172,11 +171,11 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
      * @param oldAncestors 旧的父ID集合
      */
     private void updateChildren(Long deptId, String newAncestors, String oldAncestors) {
-        List<CourseCategory> children = baseMapper.selectList(new LambdaQueryWrapper<CourseCategory>()
+        List<Category> children = baseMapper.selectList(new LambdaQueryWrapper<Category>()
             .apply(DataBaseHelper.findInSet(deptId, Constants.ANCESTORS_CODE)));
-        List<CourseCategory> list = new ArrayList<>();
-        for (CourseCategory child : children) {
-            CourseCategory cate = new CourseCategory();
+        List<Category> list = new ArrayList<>();
+        for (Category child : children) {
+            Category cate = new Category();
             cate.setId(child.getId());
             cate.setAncestors(child.getAncestors().replaceFirst(oldAncestors, newAncestors));
             list.add(cate);
@@ -196,13 +195,13 @@ public class CourseCategoryServiceImpl implements ICourseCategoryService {
      */
     @Override
     public boolean hasChildById(Long id) {
-        return baseMapper.exists(new LambdaQueryWrapper<CourseCategory>()
-            .eq(CourseCategory::getParentId, id));
+        return baseMapper.exists(new LambdaQueryWrapper<Category>()
+            .eq(Category::getParentId, id));
     }
     /**
      * 保存前的数据校验
      */
-    private void validEntityBeforeSave(CourseCategory entity){
+    private void validEntityBeforeSave(Category entity){
         //TODO 做一些数据校验,如唯一约束
     }
 

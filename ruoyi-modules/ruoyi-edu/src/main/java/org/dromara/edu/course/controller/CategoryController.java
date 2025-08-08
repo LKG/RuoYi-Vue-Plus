@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.*;
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import org.dromara.edu.course.service.ICategoryService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 import org.dromara.common.idempotent.annotation.RepeatSubmit;
@@ -17,9 +18,8 @@ import org.dromara.common.core.validate.AddGroup;
 import org.dromara.common.core.validate.EditGroup;
 import org.dromara.common.log.enums.BusinessType;
 import org.dromara.common.excel.utils.ExcelUtil;
-import org.dromara.edu.course.domain.vo.CourseCategoryVo;
-import org.dromara.edu.course.domain.bo.CourseCategoryBo;
-import org.dromara.edu.course.service.ICourseCategoryService;
+import org.dromara.edu.course.domain.vo.CategoryVo;
+import org.dromara.edu.course.domain.bo.CategoryBo;
 
 /**
  * 课程分类管理
@@ -31,16 +31,16 @@ import org.dromara.edu.course.service.ICourseCategoryService;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/edu/courseCategory")
-public class CourseCategoryController extends BaseController {
+public class CategoryController extends BaseController {
 
-    private final ICourseCategoryService courseCategoryService;
+    private final ICategoryService categoryService;
     /**
      * 获取部门树列表
      */
     @SaCheckPermission("edu:courseCategory:list")
     @GetMapping("/tree")
-    public R<List<Tree<Long>>> cateTree(CourseCategoryBo bo) {
-        return R.ok(courseCategoryService.selectCateTreeList(bo));
+    public R<List<Tree<Long>>> cateTree(CategoryBo bo) {
+        return R.ok(categoryService.selectCateTreeList(bo));
     }
 
     /**
@@ -48,8 +48,8 @@ public class CourseCategoryController extends BaseController {
      */
     @SaCheckPermission("edu:courseCategory:list")
     @GetMapping("/list")
-    public R<List<CourseCategoryVo>> list(CourseCategoryBo bo) {
-        List<CourseCategoryVo> list = courseCategoryService.queryList(bo);
+    public R<List<CategoryVo>> list(CategoryBo bo) {
+        List<CategoryVo> list = categoryService.queryList(bo);
         return R.ok(list);
     }
 
@@ -59,9 +59,9 @@ public class CourseCategoryController extends BaseController {
     @SaCheckPermission("edu:courseCategory:export")
     @Log(title = "课程分类管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(CourseCategoryBo bo, HttpServletResponse response) {
-        List<CourseCategoryVo> list = courseCategoryService.queryList(bo);
-        ExcelUtil.exportExcel(list, "课程分类管理", CourseCategoryVo.class, response);
+    public void export(CategoryBo bo, HttpServletResponse response) {
+        List<CategoryVo> list = categoryService.queryList(bo);
+        ExcelUtil.exportExcel(list, "课程分类管理", CategoryVo.class, response);
     }
 
     /**
@@ -71,9 +71,9 @@ public class CourseCategoryController extends BaseController {
      */
     @SaCheckPermission("edu:courseCategory:query")
     @GetMapping("/{id}")
-    public R<CourseCategoryVo> getInfo(@NotNull(message = "主键不能为空")
+    public R<CategoryVo> getInfo(@NotNull(message = "主键不能为空")
                                      @PathVariable Long id) {
-        return R.ok(courseCategoryService.queryById(id));
+        return R.ok(categoryService.queryById(id));
     }
 
     /**
@@ -83,8 +83,8 @@ public class CourseCategoryController extends BaseController {
     @Log(title = "课程分类管理", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
-    public R<Void> add(@Validated(AddGroup.class) @RequestBody CourseCategoryBo bo) {
-        return toAjax(courseCategoryService.insertByBo(bo));
+    public R<Void> add(@Validated(AddGroup.class) @RequestBody CategoryBo bo) {
+        return toAjax(categoryService.insertByBo(bo));
     }
 
     /**
@@ -94,8 +94,8 @@ public class CourseCategoryController extends BaseController {
     @Log(title = "课程分类管理", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
-    public R<Void> edit(@Validated(EditGroup.class) @RequestBody CourseCategoryBo bo) {
-        return toAjax(courseCategoryService.updateByBo(bo));
+    public R<Void> edit(@Validated(EditGroup.class) @RequestBody CategoryBo bo) {
+        return toAjax(categoryService.updateByBo(bo));
     }
 
     /**
@@ -108,6 +108,6 @@ public class CourseCategoryController extends BaseController {
     @DeleteMapping("/{ids}")
     public R<Void> remove(@NotEmpty(message = "主键不能为空")
                           @PathVariable Long[] ids) {
-        return toAjax(courseCategoryService.deleteWithValidByIds(List.of(ids), true));
+        return toAjax(categoryService.deleteWithValidByIds(List.of(ids), true));
     }
 }

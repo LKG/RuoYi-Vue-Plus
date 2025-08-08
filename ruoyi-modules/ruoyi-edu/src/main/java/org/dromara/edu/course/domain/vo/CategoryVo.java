@@ -1,6 +1,6 @@
 package org.dromara.edu.course.domain.vo;
 
-import org.dromara.edu.course.domain.CourseCategory;
+import org.dromara.edu.course.domain.Category;
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -19,8 +19,8 @@ import java.util.Date;
  */
 @Data
 @ExcelIgnoreUnannotated
-@AutoMapper(target = CourseCategory.class)
-public class CourseCategoryVo implements Serializable {
+@AutoMapper(target = Category.class)
+public class CategoryVo implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

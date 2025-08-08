@@ -1,6 +1,6 @@
 package org.dromara.edu.course.domain.bo;
 
-import org.dromara.edu.course.domain.CourseCategory;
+import org.dromara.edu.course.domain.Category;
 import org.dromara.common.mybatis.core.domain.BaseEntity;
 import org.dromara.common.core.validate.AddGroup;
 import org.dromara.common.core.validate.EditGroup;
@@ -17,8 +17,8 @@ import jakarta.validation.constraints.*;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@AutoMapper(target = CourseCategory.class, reverseConvertGenerate = false)
-public class CourseCategoryBo extends BaseEntity {
+@AutoMapper(target = Category.class, reverseConvertGenerate = false)
+public class CategoryBo extends BaseEntity {
 
     /**
      * 主键

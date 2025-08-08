@@ -1,8 +1,8 @@
 package org.dromara.edu.course.service;
 
 import cn.hutool.core.lang.tree.Tree;
-import org.dromara.edu.course.domain.vo.CourseCategoryVo;
-import org.dromara.edu.course.domain.bo.CourseCategoryBo;
+import org.dromara.edu.course.domain.vo.CategoryVo;
+import org.dromara.edu.course.domain.bo.CategoryBo;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author gg
  * @date 2025-07-23
  */
-public interface ICourseCategoryService {
+public interface ICategoryService {
 
     /**
      * 查询课程分类管理
@@ -21,7 +21,7 @@ public interface ICourseCategoryService {
      * @param id 主键
      * @return 课程分类管理
      */
-    CourseCategoryVo queryById(Long id);
+    CategoryVo queryById(Long id);
 
 
     /**
@@ -30,22 +30,22 @@ public interface ICourseCategoryService {
      * @param bo 查询条件
      * @return 课程分类管理列表
      */
-    List<CourseCategoryVo> queryList(CourseCategoryBo bo);
+    List<CategoryVo> queryList(CategoryBo bo);
 
     /**
      * 查询符合条件的课程分类树
      * @param bo 查询条件
      * @return 课程分类树
      */
-    List<Tree<Long>> selectCateTreeList(CourseCategoryBo bo);
-    List<Tree<Long>> buildCateTreeSelect(List<CourseCategoryVo> cateList);
+    List<Tree<Long>> selectCateTreeList(CategoryBo bo);
+    List<Tree<Long>> buildCateTreeSelect(List<CategoryVo> cateList);
     /**
      * 新增课程分类管理
      *
      * @param bo 课程分类管理
      * @return 是否新增成功
      */
-    Boolean insertByBo(CourseCategoryBo bo);
+    Boolean insertByBo(CategoryBo bo);
 
     /**
      * 修改课程分类管理
@@ -53,7 +53,7 @@ public interface ICourseCategoryService {
      * @param bo 课程分类管理
      * @return 是否修改成功
      */
-    Boolean updateByBo(CourseCategoryBo bo);
+    Boolean updateByBo(CategoryBo bo);
     /**
      * 是否存在子节点
      *
