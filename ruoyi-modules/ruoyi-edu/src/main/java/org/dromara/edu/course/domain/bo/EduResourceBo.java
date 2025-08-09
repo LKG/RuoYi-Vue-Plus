@@ -38,6 +38,11 @@ public class EduResourceBo extends BaseEntity {
     private String coverUrl;
 
     /**
+     * 文件地址
+     */
+    private String fileUrl;
+
+    /**
      * 分类id
      */
     @NotNull(message = "分类id不能为空", groups = { AddGroup.class, EditGroup.class })
@@ -57,13 +62,11 @@ public class EduResourceBo extends BaseEntity {
     /**
      * 所属标签
      */
-    @NotBlank(message = "所属标签不能为空", groups = { AddGroup.class, EditGroup.class })
     private String tagIds;
 
     /**
      * 资源描述
      */
-    @NotBlank(message = "资源描述不能为空", groups = { AddGroup.class, EditGroup.class })
     private String description;
 
     /**
@@ -84,8 +87,7 @@ public class EduResourceBo extends BaseEntity {
     /**
      * 发布时间
      */
-    @NotNull(message = "发布时间不能为空", groups = { AddGroup.class, EditGroup.class })
-    private Date publishTime;
+     private Date publishTime;
 
 
 }

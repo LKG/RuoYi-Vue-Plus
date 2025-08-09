@@ -23,7 +23,12 @@ public interface ICategoryService {
      */
     CategoryVo queryById(Long id);
 
-
+    /**
+     * 根据id查询名称
+     * @param categoryId 分类id
+     * @return 分类名称
+     */
+    String selectNameById(Long categoryId);
     /**
      * 查询符合条件的课程分类管理列表
      *

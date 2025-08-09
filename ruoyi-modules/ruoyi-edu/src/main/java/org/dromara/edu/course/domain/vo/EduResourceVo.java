@@ -1,14 +1,12 @@
 package org.dromara.edu.course.domain.vo;
 
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.dromara.edu.course.domain.EduResource;
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
-import org.dromara.common.excel.annotation.ExcelDictFormat;
-import org.dromara.common.excel.convert.ExcelDictConvert;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
+import org.dromara.common.translation.annotation.Translation;
+import org.dromara.common.translation.constant.TransConstant;
+import org.dromara.edu.course.domain.EduResource;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -48,12 +46,24 @@ public class EduResourceVo implements Serializable {
     @ExcelProperty(value = "封面")
     private String coverUrl;
 
+    @Translation(type = TransConstant.OSS_ID_TO_URL,mapper="coverUrl")
+    private String coverOssUrl;
+    /**
+     * 文件地址
+     */
+    @ExcelProperty(value = "文件地址")
+    private String fileUrl;
+
+    @Translation(type = TransConstant.OSS_ID_TO_URL,mapper="fileUrl")
+    private String fileOssUrl;
+
     /**
      * 分类id
      */
-    @ExcelProperty(value = "分类id")
+    @ExcelProperty(value = "分类名称")
     private Long categoryId;
-
+    @Translation(type = "category_id_to_name",mapper="categoryId")
+    private String categoryName;
     /**
      * 资源类型
      */

@@ -7,5 +7,5 @@ import org.dromara.common.core.constant.CacheNames;
  * edu 缓存名称
  */
 public interface EduCacheNames extends CacheNames {
-    String EDU_COURSE_CATEGORY = "edu_course_category#30d";
+    String EDU_CATEGORY = "edu_category_name#30d";
 }

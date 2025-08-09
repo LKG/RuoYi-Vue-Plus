@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.dromara.common.core.constant.Constants;
 import org.dromara.common.core.exception.ServiceException;
 import org.dromara.common.core.utils.MapstructUtils;
+import org.dromara.common.core.utils.ObjectUtils;
 import org.dromara.common.core.utils.StringUtils;
 import org.dromara.common.core.utils.TreeBuildUtils;
 import org.dromara.common.mybatis.helper.DataBaseHelper;
@@ -20,6 +21,7 @@ import org.dromara.edu.course.domain.bo.CategoryBo;
 import org.dromara.edu.course.domain.vo.CategoryVo;
 import org.dromara.edu.course.mapper.CategoryMapper;
 import org.dromara.edu.course.service.ICategoryService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ import java.util.Map;
 @Service
 public class CategoryServiceImpl implements ICategoryService {
 
-    private final CategoryMapper baseMapper;
+    private final CategoryMapper categoryMapper;
 
     /**
      * 查询课程分类管理
@@ -48,7 +50,7 @@ public class CategoryServiceImpl implements ICategoryService {
      */
     @Override
     public CategoryVo queryById(Long id){
-        return baseMapper.selectVoById(id);
+        return categoryMapper.selectVoById(id);
     }
 
 
@@ -61,9 +63,15 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public List<CategoryVo> queryList(CategoryBo bo) {
         LambdaQueryWrapper<Category> lqw = buildQueryWrapper(bo);
-        return baseMapper.selectVoList(lqw);
+        return categoryMapper.selectVoList(lqw);
     }
-
+    @Cacheable(cacheNames = EduCacheNames.EDU_CATEGORY, key = "#categoryId")
+    @Override
+    public String selectNameById(Long categoryId) {
+        Category category = categoryMapper.selectOne(new LambdaQueryWrapper<Category>()
+            .select(Category::getName).eq(Category::getId, categoryId));
+        return ObjectUtils.notNullGetter(category, Category::getName);
+    }
     /**
      * 查询符合条件的课程分类树
      * @param bo 查询条件
@@ -72,7 +80,7 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public List<Tree<Long>> selectCateTreeList(CategoryBo bo) {
         LambdaQueryWrapper<Category> lqw = buildQueryWrapper(bo);
-        List<CategoryVo> cateList = baseMapper.selectVoList(lqw);
+        List<CategoryVo> cateList = categoryMapper.selectVoList(lqw);
         return buildCateTreeSelect(cateList);
     }
     /**
@@ -120,13 +128,13 @@ public class CategoryServiceImpl implements ICategoryService {
         assert add != null;
         String ancestors=Constants.ROOT_ANCESTORS;
         if(!bo.getParentId().equals(0L)){
-            Category info = baseMapper.selectById(bo.getParentId());
+            Category info = categoryMapper.selectById(bo.getParentId());
             ancestors=info.getAncestors() + StringUtils.SEPARATOR + info.getParentId();
             add.setCategoryLevel(info.getCategoryLevel()+1);
         }
         add.setAncestors(ancestors);
         validEntityBeforeSave(add);
-        boolean flag = baseMapper.insert(add) > 0;
+        boolean flag = categoryMapper.insert(add) > 0;
         if (flag) {
             bo.setId(add.getId());
         }
@@ -142,14 +150,14 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public Boolean updateByBo(CategoryBo bo) {
         Category update = MapstructUtils.convert(bo, Category.class);
-        Category oldCategory = baseMapper.selectById(bo.getParentId());
+        Category oldCategory = categoryMapper.selectById(bo.getParentId());
         if (ObjectUtil.isNull(oldCategory)) {
             throw new ServiceException("分类不存在，无法修改");
         }
         assert update != null;
         if (!oldCategory.getParentId().equals(update.getParentId())) {
             // 如果是新父部门 则校验是否具有新父部门权限 避免越权
-            Category newParentCategory = baseMapper.selectById(update.getParentId());
+            Category newParentCategory = categoryMapper.selectById(update.getParentId());
             if (ObjectUtil.isNotNull(newParentCategory)) {
                 update.setCategoryLevel(newParentCategory.getCategoryLevel());
                 String newAncestors = newParentCategory.getAncestors() + StringUtils.SEPARATOR + newParentCategory.getId();
@@ -161,7 +169,7 @@ public class CategoryServiceImpl implements ICategoryService {
             update.setAncestors(oldCategory.getAncestors());
         }
         validEntityBeforeSave(update);
-        return baseMapper.updateById(update) > 0;
+        return categoryMapper.updateById(update) > 0;
     }
     /**
      * 修改子元素关系
@@ -171,7 +179,7 @@ public class CategoryServiceImpl implements ICategoryService {
      * @param oldAncestors 旧的父ID集合
      */
     private void updateChildren(Long deptId, String newAncestors, String oldAncestors) {
-        List<Category> children = baseMapper.selectList(new LambdaQueryWrapper<Category>()
+        List<Category> children = categoryMapper.selectList(new LambdaQueryWrapper<Category>()
             .apply(DataBaseHelper.findInSet(deptId, Constants.ANCESTORS_CODE)));
         List<Category> list = new ArrayList<>();
         for (Category child : children) {
@@ -181,8 +189,8 @@ public class CategoryServiceImpl implements ICategoryService {
             list.add(cate);
         }
         if (CollUtil.isNotEmpty(list)) {
-            if (baseMapper.updateBatchById(list)) {
-                list.forEach(cate -> CacheUtils.evict(EduCacheNames.EDU_COURSE_CATEGORY, cate.getId()));
+            if (categoryMapper.updateBatchById(list)) {
+                list.forEach(cate -> CacheUtils.evict(EduCacheNames.EDU_CATEGORY, cate.getId()));
             }
         }
     }
@@ -195,7 +203,7 @@ public class CategoryServiceImpl implements ICategoryService {
      */
     @Override
     public boolean hasChildById(Long id) {
-        return baseMapper.exists(new LambdaQueryWrapper<Category>()
+        return categoryMapper.exists(new LambdaQueryWrapper<Category>()
             .eq(Category::getParentId, id));
     }
     /**
@@ -222,6 +230,6 @@ public class CategoryServiceImpl implements ICategoryService {
               }
             });
         }
-        return baseMapper.deleteByIds(ids) > 0;
+        return categoryMapper.deleteByIds(ids) > 0;
     }
 }

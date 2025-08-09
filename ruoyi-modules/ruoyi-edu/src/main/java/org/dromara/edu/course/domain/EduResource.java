@@ -38,7 +38,10 @@ public class EduResource extends TenantEntity {
      * 封面
      */
     private String coverUrl;
-
+    /**
+     * 文件地址
+     */
+    private String fileUrl;
     /**
      * 分类id
      */

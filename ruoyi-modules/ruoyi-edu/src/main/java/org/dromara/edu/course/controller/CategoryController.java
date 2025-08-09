@@ -30,14 +30,14 @@ import org.dromara.edu.course.domain.bo.CategoryBo;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/edu/courseCategory")
+@RequestMapping("/edu/category")
 public class CategoryController extends BaseController {
 
     private final ICategoryService categoryService;
     /**
      * 获取部门树列表
      */
-    @SaCheckPermission("edu:courseCategory:list")
+    @SaCheckPermission("edu:category:list")
     @GetMapping("/tree")
     public R<List<Tree<Long>>> cateTree(CategoryBo bo) {
         return R.ok(categoryService.selectCateTreeList(bo));
@@ -46,7 +46,7 @@ public class CategoryController extends BaseController {
     /**
      * 查询课程分类管理列表
      */
-    @SaCheckPermission("edu:courseCategory:list")
+    @SaCheckPermission("edu:category:list")
     @GetMapping("/list")
     public R<List<CategoryVo>> list(CategoryBo bo) {
         List<CategoryVo> list = categoryService.queryList(bo);
@@ -56,7 +56,7 @@ public class CategoryController extends BaseController {
     /**
      * 导出课程分类管理列表
      */
-    @SaCheckPermission("edu:courseCategory:export")
+    @SaCheckPermission("edu:category:export")
     @Log(title = "课程分类管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(CategoryBo bo, HttpServletResponse response) {
@@ -69,7 +69,7 @@ public class CategoryController extends BaseController {
      *
      * @param id 主键
      */
-    @SaCheckPermission("edu:courseCategory:query")
+    @SaCheckPermission("edu:category:query")
     @GetMapping("/{id}")
     public R<CategoryVo> getInfo(@NotNull(message = "主键不能为空")
                                      @PathVariable Long id) {
@@ -79,7 +79,7 @@ public class CategoryController extends BaseController {
     /**
      * 新增课程分类管理
      */
-    @SaCheckPermission("edu:courseCategory:add")
+    @SaCheckPermission("edu:category:add")
     @Log(title = "课程分类管理", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
@@ -90,7 +90,7 @@ public class CategoryController extends BaseController {
     /**
      * 修改课程分类管理
      */
-    @SaCheckPermission("edu:courseCategory:edit")
+    @SaCheckPermission("edu:category:edit")
     @Log(title = "课程分类管理", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
@@ -103,7 +103,7 @@ public class CategoryController extends BaseController {
      *
      * @param ids 主键串
      */
-    @SaCheckPermission("edu:courseCategory:remove")
+    @SaCheckPermission("edu:category:remove")
     @Log(title = "课程分类管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public R<Void> remove(@NotEmpty(message = "主键不能为空")
