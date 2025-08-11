@@ -2,6 +2,8 @@ package org.dromara.edu.course.domain.vo;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.dromara.common.translation.annotation.Translation;
+import org.dromara.common.translation.constant.TransConstant;
 import org.dromara.edu.course.domain.Course;
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
@@ -65,13 +67,15 @@ public class CourseVo implements Serializable {
      */
     @ExcelProperty(value = "课程封面")
     private String coverUrl;
-
+    @Translation(type = TransConstant.OSS_ID_TO_URL,mapper="coverUrl")
+    private String coverOssUrl;
     /**
      * 分类id
      */
     @ExcelProperty(value = "分类id")
     private Long categoryId;
-
+    @Translation(type = "category_id_to_name",mapper="categoryId")
+    private String categoryName;
     /**
      * 课程类型
      */
@@ -145,6 +149,5 @@ public class CourseVo implements Serializable {
      */
     @ExcelProperty(value = "通知用户/部门")
     private String noticeUsers;
-
 
 }
