@@ -80,7 +80,7 @@ public class CourseVo implements Serializable {
      * 课程类型
      */
     @ExcelProperty(value = "课程类型", converter = ExcelDictConvert.class)
-    @ExcelDictFormat(dictType = "crm_scene_type")
+    @ExcelDictFormat(dictType = "edu_course_type")
     private Integer type;
 
     /**

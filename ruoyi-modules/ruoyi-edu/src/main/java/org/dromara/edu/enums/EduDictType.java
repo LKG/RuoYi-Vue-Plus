@@ -19,11 +19,11 @@ public enum EduDictType implements BaseEnum<String>, EduConstants{
     /**
      * 试卷 考题状态
      */
-    CLASS_WAY("class_way","上课方式"),
+    CLASS_WAY(DICT_PREFIX+"class_way","上课方式"),
     /**
      * 课程类型
      */
-    COURSE_TYPE("course_type","课程类型"),
+    COURSE_TYPE(DICT_PREFIX+"course_type","课程类型"),
 
     ;
     private final String value;

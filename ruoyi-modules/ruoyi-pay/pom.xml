@@ -15,7 +15,9 @@
         pay 模块，我们放支付业务，提供业务的支付能力。
         例如说：商户、应用、支付、退款等等
     </description>
-
+    <properties>
+        <alipay.version>4.40.393.ALL</alipay.version>
+    </properties>
     <dependencies>
 
         <!-- 通用工具-->
@@ -107,11 +109,23 @@
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
-            <version>4.40.186.ALL</version>
+            <version>${alipay.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bouncycastle</groupId>
                     <artifactId>bcprov-jdk15on</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.squareup.okhttp3</groupId>
+                    <artifactId>okhttp</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>dom4j</groupId>
+                    <artifactId>dom4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.squareup.okio</groupId>
+                    <artifactId>okio</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

@@ -8,7 +8,6 @@ import lombok.*;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
 public class CustomKeyStoreParam extends AbstractKeyStoreParam{
     /**
      * 密钥路径，可为磁盘路径，也可为项目资源文件里的路径,如果为磁盘路径需重写getStream()方法

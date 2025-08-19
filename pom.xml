@@ -27,7 +27,7 @@
         <mybatis-plus.version>3.5.12</mybatis-plus.version>
         <p6spy.version>3.9.1</p6spy.version>
         <hutool.version>5.8.38</hutool.version>
-        <spring-boot-admin.version>3.4.7</spring-boot-admin.version>
+        <spring-boot-admin.version>3.5.1</spring-boot-admin.version>
         <redisson.version>3.50.0</redisson.version>
         <lock4j.version>2.2.7</lock4j.version>
         <dynamic-ds.version>4.3.1</dynamic-ds.version>
@@ -40,9 +40,9 @@
         <!-- 离线IP地址定位库 -->
         <ip2region.version>2.7.0</ip2region.version>
         <!-- OSS 配置 -->
-        <aws.sdk.version>2.28.22</aws.sdk.version>
+        <aws.sdk.version>2.32.22</aws.sdk.version>
         <!-- SMS 配置 -->
-        <sms4j.version>3.3.4</sms4j.version>
+        <sms4j.version>3.3.5</sms4j.version>
         <!-- 限制框架中的fastjson版本 -->
         <fastjson.version>1.2.83</fastjson.version>
         <!-- 面向运行时的D-ORM依赖 -->
@@ -61,13 +61,15 @@
         <zip4j.version>2.11.5</zip4j.version>
         <mybatis-plus.version>3.5.12</mybatis-plus.version>
         <mybatis-flex.version>1.10.9</mybatis-flex.version>
-        <x-file-storage.version>2.2.1</x-file-storage.version>
-        <cosid.version>2.13.0</cosid.version>
+        <x-file-storage.version>2.3.0</x-file-storage.version>
+        <cosid.version>2.13.3</cosid.version>
         <weixin-java.version>4.7.7.B</weixin-java.version>
         <alipay.version>4.40.186.ALL</alipay.version>
         <bizlog-sdk.version>3.0.6</bizlog-sdk.version>
         <easy-trans.version>3.1.2</easy-trans.version>
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
+        <error_prone.version>2.23.0</error_prone.version>
+        <guava.version>33.4.8-jre</guava.version>
         <!--添加jar  -->
 
         <!-- 插件版本 -->
@@ -123,6 +125,44 @@
                 <groupId>com.yomahub</groupId>
                 <artifactId>tlog-all-spring-boot-starter</artifactId>
                 <version>${tlog.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
+                <version>${flex.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-processor</artifactId>
+                <version>${flex.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.dromara.x-file-storage</groupId>
+                <artifactId>x-file-storage-spring</artifactId>
+                <version>${x-file-storage.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-io</groupId>
+                        <artifactId>commons-io</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http2</artifactId>
+                <version>4.2.4.Final</version>
+            </dependency>
+            <!-- 数据填充翻译 -->
+            <dependency>
+                <groupId>cn.crane4j</groupId>
+                <artifactId>crane4j-spring-boot-starter</artifactId>
+                <version>${crane4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.errorprone</groupId>
+                <artifactId>error_prone_annotations</artifactId>
+                <version>${error_prone.version}</version>
             </dependency>
             <!-- Zip4j (开源的 Java 处理 zip 压缩文件的开发包) -->
             <dependency>
