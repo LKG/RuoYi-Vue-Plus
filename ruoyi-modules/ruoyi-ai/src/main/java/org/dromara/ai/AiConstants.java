@@ -5,5 +5,5 @@ package org.dromara.ai;
  * ai 常量
  */
 public interface AiConstants {
-    String DICT_PREFIX="pay_";
+    String DICT_PREFIX="ai_";
 }
